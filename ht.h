@@ -357,7 +357,9 @@ if (average >= PosFirst)
         table_[newTable]->item.second = p.second;
         break;
     case false:
-        table_[newTable] = new HashItem(p);
+      
+        HashItem* tempItem = new HashItem(p);
+        table_[newTable] = tempItem;
         table_[newTable]->deleted = 0;
         originalVal_++;
         break;
