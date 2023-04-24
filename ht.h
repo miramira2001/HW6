@@ -459,18 +459,24 @@ void HashTable<K,V,Prober,Hash,KEqual>::resize()
     originalVal_ = 0;
     newNum_ = 0;
     while (!last.empty()) {
+
       if (last.back() != nullptr && last.back()->deleted == 1) {
         delete last.back();
       }
-        switch (last.back() != nullptr && last.back()->deleted == 0) {
-            case true:
-                insert(last.back()->item);
-                delete last.back();
-                break;
-            default:
-                break;
-        }
-        last.pop_back();
+      else if (last.back () != nullptr &&last.back()-> deleted == 0){
+        insert(last.back()->item);
+        delete last.back();
+      }
+
+      // switch (last.back() != nullptr && last.back()->deleted == 0) {
+      //     case true:
+      //         insert(last.back()->item);
+      //         delete last.back();
+      //         break;
+      //     default:
+      //         break;
+      // }
+      last.pop_back();
     }
 }
 
