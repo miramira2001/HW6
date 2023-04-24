@@ -357,9 +357,9 @@ if (average >= PosFirst)
         table_[newTable]->item.second = p.second;
         break;
     case false:
-      
-        HashItem* tempItem = new HashItem(p);
-        table_[newTable] = tempItem;
+        HashItem* tempItem = table_[newTable];
+        delete tempItem;
+        table_[newTable] = new HashItem(p);
         table_[newTable]->deleted = 0;
         originalVal_++;
         break;
@@ -459,6 +459,9 @@ void HashTable<K,V,Prober,Hash,KEqual>::resize()
     originalVal_ = 0;
     newNum_ = 0;
     while (!last.empty()) {
+      if (last.back() != nullptr && last.back()->deleted == 1) {
+        delete last.back();
+      }
         switch (last.back() != nullptr && last.back()->deleted == 0) {
             case true:
                 insert(last.back()->item);
